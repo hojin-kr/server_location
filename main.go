@@ -16,7 +16,8 @@ func main() {
 		location := location.Location{}
 		location.UUID = c.Params("uuid")
 		location.GetLocation()
-		return c.SendString(location.Location)
+		// to json
+		return c.JSON(location)
 	})
 
 	app.Post("/location", func(c *fiber.Ctx) error {
@@ -25,7 +26,7 @@ func main() {
 			return err
 		}
 		location.SetLocation()
-		return c.SendString(location.Location)
+		return c.JSON(location)
 	})
 
 	app.Listen(":3000")
